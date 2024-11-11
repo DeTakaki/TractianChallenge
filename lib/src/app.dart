@@ -1,4 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'routing/app_router.dart';
+
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -6,30 +13,51 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.blue[900],
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+    return MaterialApp.router(
+      title: 'Tractian',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: Colors.blue[900],
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
+      debugShowCheckedModeBanner: kDebugMode,
+      routerConfig: router,
     );
   }
 }
 
+//   @override
+//   Widget build(BuildContext context) {
+//     SystemChrome.setSystemUIOverlayStyle(
+//         const SystemUiOverlayStyle(statusBarColor: AppColors.backgroundGreen));
+//     return MaterialApp(
+//       theme: ThemeData(
+//         primaryColor: AppColors.primary,
+//         useMaterial3: false,
+//       ),
+//       scaffoldMessengerKey: rootScaffoldMessengerKey,
+//       navigatorKey: navigatorKey,
+//       debugShowCheckedModeBanner: AppEnvironment.current == EnvironmentType.dev,
+//       title: 'Eldorado',
+//       onGenerateRoute: (settings) => AppRouter.getRoute(settings),
+//       localizationsDelegates: const [
+//         GlobalMaterialLocalizations.delegate,
+//         GlobalWidgetsLocalizations.delegate,
+//         GlobalCupertinoLocalizations.delegate,
+//       ],
+//       supportedLocales: const [Locale('pt', 'BR')],
+//     );
+//   }
+// }
+
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -65,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text("Tractian"),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
