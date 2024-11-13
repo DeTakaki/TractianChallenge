@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../utils/request_manager.dart';
 import '../domain/asset.dart';
 import '../domain/company.dart';
@@ -5,9 +7,9 @@ import '../domain/location.dart';
 import '../presentation/widgets/app_exception.dart';
 
 class CoreRepository {
-  Future<List<Company>> getCompanyAssets() async {
+  Future<List<Company>> getCompanies() async {
     final response = await RequestManager()
-        .restRequest(url: 'companies', method: HttpMethods.patch);
+        .restRequest(url: 'companies', method: HttpMethods.get);
 
     if (response.statusCode == 200) {
       final companies = (response.data as List)
@@ -48,3 +50,7 @@ class CoreRepository {
     }
   }
 }
+
+final coreRepositoryProvider = Provider<CoreRepository>((ref) {
+  return CoreRepository();
+});

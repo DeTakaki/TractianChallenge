@@ -42,4 +42,7 @@ class Location {
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode ^ parentId.hashCode;
+
+  @override
+  String toString() => 'Location(id: $id, name: $name, parentId: $parentId)';
 }
